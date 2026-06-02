@@ -1,3 +1,6 @@
 /src/node_modules
 /src/package-lock.json
 /src/package.json
+package.json
+package-lock.json
+/node_modules
