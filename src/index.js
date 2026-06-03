@@ -1,4 +1,5 @@
 import './style.css';
+import { generateEmptyBoard, initWebDataRocks } from './gameBoard';
 
 console.log('Game client is running');
 
@@ -14,5 +15,5 @@ myBoardData.forEach(cell => {
 });
 
 const pivot = initWebDataRocks("#wdr-component", myBoardData, (x, y) => {
-    console.log(`Постріл у координати: ${x}${y}`);
+    console.log(`Shot at: ${x}${y}`);
 });
