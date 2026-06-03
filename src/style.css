@@ -24,3 +24,51 @@ body {
     margin: 0 auto;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
+
+#wdr-component {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+#wdr-component .wdr-cell.wdr-value {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    cursor: crosshair;
+    border: 1px solid #999;
+    transition: background-color 0.2s;
+}
+
+.cell-water {
+    background-color: #e0f7fa !important;
+}
+.cell-ship {
+    background-color: #78909c !important;
+}
+.cell-miss {
+    background-color: #e0f7fa !important;
+}
+
+.cell-miss::after {
+    content: '•';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #546e7a;
+}
+
+.cell-hit {
+    background-color: #ffcdd2 !important;
+}
+
+.cell-hit::after {
+    content: '✖';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #c62828;
+}
