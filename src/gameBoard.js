@@ -4,7 +4,6 @@ export function generateEmptyBoard() {
     
     for (let r = 0; r < rows.length; r++) {
         for (let c = 1; c <= 10; c++) {
-            // 0 - вода, 1 - корабель, 2 - мимо, 3 - влучання
             data.push({ x: c.toString(), y: rows[r], status: 0 }); 
         }
     }
@@ -14,14 +13,14 @@ export function generateEmptyBoard() {
 export function initWebDataRocks(containerId, data, onCellClick) {
     const pivot = new WebDataRocks({
         container: containerId,
-        toolbar: false,
+        toolbar: false, 
         report: {
             dataSource: { data: data },
             slice: {
                 rows: [{ uniqueName: "y" }],
                 columns: [{ uniqueName: "x" }],
                 measures: [{ uniqueName: "status", aggregation: "max" }]
-                },
+            },
             options: {
                 grid: { 
                     showHeaders: false,
@@ -33,7 +32,6 @@ export function initWebDataRocks(containerId, data, onCellClick) {
         customizeCell: (cellBuilder, cellData) => {
             if (cellData.type === "value") {
                 cellBuilder.text = ""; 
-
                 if (cellData.value === 0) cellBuilder.addClass("cell-water");
                 if (cellData.value === 1) cellBuilder.addClass("cell-ship");
                 if (cellData.value === 2) cellBuilder.addClass("cell-miss");
@@ -41,6 +39,7 @@ export function initWebDataRocks(containerId, data, onCellClick) {
             }
         }
     });
+
     pivot.on('cellclick', (cell) => {
         if (cell.type === "value") {
             const x = cell.columns[0].caption;
