@@ -12,9 +12,9 @@ export function generateEmptyBoard() {
 }
 
 export function initWebDataRocks(containerId, data, onCellClick) {
-    const pivot = new WebDataRocks({
+    const pivot = new window.WebDataRocks({
         container: containerId,
-        toolbar: false, 
+        toolbar: false,
         report: {
             dataSource: { data: data },
             slice: {
@@ -23,11 +23,7 @@ export function initWebDataRocks(containerId, data, onCellClick) {
                 measures: [{ uniqueName: "status", aggregation: "max" }]
             },
             options: {
-                grid: { 
-                    showHeaders: false,
-                    showGrandTotals: "off", 
-                    showTotals: "off" 
-                }
+                grid: { showHeaders: false, showGrandTotals: "off", showTotals: "off" }
             }
         },
         customizeCell: (cellBuilder, cellData) => {

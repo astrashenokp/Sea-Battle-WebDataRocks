@@ -10,16 +10,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                parser: {
-                    sourceType: 'module'
-                }
-            },
-            {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
-            },
+            }
         ],
-    },
+    }
 };
