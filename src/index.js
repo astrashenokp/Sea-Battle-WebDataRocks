@@ -1,5 +1,5 @@
 import './style.css';
-import { generateEmptyBoard, initWebDataRocks } from './gameBoard';
+import { generateRandomFleet, initWebDataRocks } from './gameBoard';
 
 console.log('Game client is running');
 
