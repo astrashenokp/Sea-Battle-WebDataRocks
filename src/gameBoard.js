@@ -4,6 +4,7 @@ export function generateEmptyBoard() {
     
     for (let r = 0; r < rows.length; r++) {
         for (let c = 1; c <= 10; c++) {
+            // 0 - вода, 1 - корабель, 2 - мимо, 3 - влучання
             data.push({ x: c.toString(), y: rows[r], status: 0 }); 
         }
     }
