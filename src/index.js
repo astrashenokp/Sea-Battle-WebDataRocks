@@ -5,7 +5,7 @@ console.log('Game client is running');
 
 const statusElement = document.getElementById('game-status');
 
-let myBoardData = generateEmptyBoard();
+let myBoardData = generateRandomFleet();
 
 let pivot = null;
 let ws = null;

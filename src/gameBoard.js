@@ -49,7 +49,7 @@ export function generateRandomFleet() {
 }
 
 export function initWebDataRocks(containerId, data, onCellClick) {
-    const pivot = new window.WebDataRocks({
+    const pivot = new WebDataRocks({
         container: containerId,
         toolbar: false,
         report: {
