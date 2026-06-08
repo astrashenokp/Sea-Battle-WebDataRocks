@@ -82,8 +82,15 @@ ws.onmessage = (event) => {
                 statusElement.style.backgroundColor = '#c8e6c9';
                 isMyTurn = false;
             } else {
-                statusElement.innerText = `You ${data.hit ? 'HIT' : 'missed'} at ${data.x}${data.y}! Waiting for opponent...`;
-                statusElement.style.backgroundColor = '#ffe082';
+                if (data.hit) {
+                    isMyTurn = true; 
+                    statusElement.innerText = `You HIT at ${data.x}${data.y}! Shoot again!`;
+                    statusElement.style.backgroundColor = '#c8e6c9';
+                } else {
+                    isMyTurn = false; 
+                    statusElement.innerText = `You missed at ${data.x}${data.y}. Waiting for opponent...`;
+                    statusElement.style.backgroundColor = '#ffe082';
+                }
             }
         }
     }
