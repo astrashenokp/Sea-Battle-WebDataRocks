@@ -12,23 +12,26 @@ body {
 
 #game-status {
     color: #333;
-    padding: 10px 20px;
+    padding: 15px 25px;
     border-radius: 5px;
     background-color: #e0e0e0;
     display: inline-block;
     transition: background-color 0.3s;
     margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 #controls {
     display: flex;
     justify-content: center;
     gap: 15px;
+    margin-bottom: 20px;
 }
 
 .action-btn {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 12px 24px;
+    font-size: 18px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -54,16 +57,26 @@ body {
     cursor: not-allowed;
 }
 
-#wdr-component { max-width: 500px; margin: 20px auto; }
+#wdr-component { 
+    max-width: 95vw; 
+    margin: 0 auto; 
+}
+
+#wdr-component .wdr-cell {
+    font-size: 16px !important;
+}
+
 #wdr-component .wdr-cell.wdr-value {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
+    width: min(7vw, 75px) !important;
+    height: min(7vw, 75px) !important;
+    min-width: min(7vw, 75px) !important;
     cursor: crosshair;
     border: 1px solid #999;
 }
+
 .cell-water { background-color: #e0f7fa !important; }
 .cell-ship { background-color: #78909c !important; }
+
 .cell-miss {
     background-color: #e0f7fa !important;
     position: relative;
@@ -75,7 +88,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 24px;
+    font-size: min(4vw, 40px);
     color: #546e7a;
 }
 
@@ -90,6 +103,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 20px;
+    font-size: min(3vw, 30px);
     color: #c62828;
 }
