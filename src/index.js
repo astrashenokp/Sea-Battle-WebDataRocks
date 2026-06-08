@@ -1,27 +1,45 @@
 import './style.css';
 import { generateRandomFleet, initWebDataRocks } from './gameBoard';
 
-console.log('Game client is running');
-
 const statusElement = document.getElementById('game-status');
 const randomizeBtn = document.getElementById('randomize-btn');
-let myBoardData = generateRandomFleet();
+const readyBtn = document.getElementById('ready-btn');
+const controls = document.getElementById('controls');
 
+let myBoardData = generateRandomFleet();
 let pivot = null;
 let ws = null;
 let myPlayerId = null;
 
 let isMyTurn = false;
 let enemyHitsOnMe = 0; 
+let gameStarted = false;
+let amIReady = false;
 
 window.addEventListener('beforeunload', (e) => {
     e.preventDefault();
     e.returnValue = ''; 
 });
+
 if (randomizeBtn) {
     randomizeBtn.addEventListener('click', () => {
-        myBoardData = generateRandomFleet();
-        pivot.updateData({ data: myBoardData });
+        if (!amIReady && !gameStarted) {
+            myBoardData = generateRandomFleet();
+            pivot.updateData({ data: myBoardData });
+        }
+    });
+}
+
+if (readyBtn) {
+    readyBtn.addEventListener('click', () => {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            amIReady = true;
+            randomizeBtn.disabled = true;
+            readyBtn.disabled = true;
+            statusElement.innerText = 'Waiting for opponent to get ready...';
+            statusElement.style.backgroundColor = '#fff3e0';
+            ws.send(JSON.stringify({ type: 'READY' }));
+        }
     });
 }
 
@@ -30,22 +48,36 @@ ws = new WebSocket('ws://localhost:8080');
 ws.onopen = () => {
     statusElement.innerText = 'Connected! Waiting for opponent...';
     statusElement.style.backgroundColor = '#fff3e0';
+    if (readyBtn) readyBtn.disabled = true;
 };
 
 ws.onmessage = (event) => {
     const data = JSON.parse(event.data);
 
-    if (data.type === 'start') {
+    if (data.type === 'connected') {
+        statusElement.innerText = data.message;
+        statusElement.style.backgroundColor = '#e3f2fd';
+        if (!amIReady && readyBtn) readyBtn.disabled = false;
+    }
+    else if (data.type === 'OPPONENT_READY') {
+        if (!amIReady) {
+            statusElement.innerText = 'Opponent is ready! Click Ready to start.';
+            statusElement.style.backgroundColor = '#fff9c4';
+        }
+    }
+    else if (data.type === 'start') {
+        gameStarted = true;
         myPlayerId = data.player;
         isMyTurn = (myPlayerId === 1); 
         statusElement.innerText = data.message;
         statusElement.style.backgroundColor = isMyTurn ? '#c8e6c9' : '#ffe082';
-        if (randomizeBtn) randomizeBtn.style.display = 'none';
+        if (controls) controls.style.display = 'none';
     } 
     else if (data.type === 'error' || data.type === 'DISCONNECT') {
         statusElement.innerText = data.message;
         statusElement.style.backgroundColor = '#ffebee';
         isMyTurn = false; 
+        gameStarted = false;
     }
     else if (data.type === 'SHOOT') {
         if (data.playerId !== myPlayerId) {
@@ -111,8 +143,8 @@ ws.onmessage = (event) => {
 };
 
 pivot = initWebDataRocks("#wdr-component", myBoardData, (x, y) => {
-    if (!myPlayerId) {
-        alert("Game hasn't started yet! Wait for opponent.");
+    if (!gameStarted) {
+        alert("Game hasn't started yet! Press Ready and wait for opponent.");
         return;
     }
     if (!isMyTurn) { 

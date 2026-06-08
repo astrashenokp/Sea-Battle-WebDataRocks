@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sea Battle</title>
-    
     <link href="https://cdn.webdatarocks.com/latest/webdatarocks.min.css" rel="stylesheet" />
     <script src="https://cdn.webdatarocks.com/latest/webdatarocks.js"></script>
 </head>
@@ -14,7 +13,10 @@
             <h1>Sea Battle</h1>
             <h2 id="game-status">Initializing game...</h2>
             
-            <button id="randomize-btn" class="action-btn">Generate Fleet</button>
+            <div id="controls">
+                <button id="randomize-btn" class="action-btn">Generate Fleet</button>
+                <button id="ready-btn" class="action-btn ready-btn" disabled>Ready</button>
+            </div>
         </div>
         
         <div id="wdr-component"></div>
