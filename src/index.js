@@ -4,6 +4,7 @@ import { generateRandomFleet, initWebDataRocks } from './gameBoard';
 console.log('Game client is running');
 
 const statusElement = document.getElementById('game-status');
+const randomizeBtn = document.getElementById('randomize-btn');
 let myBoardData = generateRandomFleet();
 
 let pivot = null;
@@ -11,12 +12,18 @@ let ws = null;
 let myPlayerId = null;
 
 let isMyTurn = false;
-let enemyHitsOnMe = 0;
+let enemyHitsOnMe = 0; 
 
 window.addEventListener('beforeunload', (e) => {
     e.preventDefault();
     e.returnValue = ''; 
 });
+if (randomizeBtn) {
+    randomizeBtn.addEventListener('click', () => {
+        myBoardData = generateRandomFleet();
+        pivot.updateData({ data: myBoardData });
+    });
+}
 
 ws = new WebSocket('ws://localhost:8080');
 
@@ -30,14 +37,15 @@ ws.onmessage = (event) => {
 
     if (data.type === 'start') {
         myPlayerId = data.player;
-        isMyTurn = (myPlayerId === 1);
+        isMyTurn = (myPlayerId === 1); 
         statusElement.innerText = data.message;
         statusElement.style.backgroundColor = isMyTurn ? '#c8e6c9' : '#ffe082';
+        if (randomizeBtn) randomizeBtn.style.display = 'none';
     } 
     else if (data.type === 'error' || data.type === 'DISCONNECT') {
         statusElement.innerText = data.message;
         statusElement.style.backgroundColor = '#ffebee';
-        isMyTurn = false;
+        isMyTurn = false; 
     }
     else if (data.type === 'SHOOT') {
         if (data.playerId !== myPlayerId) {
@@ -46,9 +54,9 @@ ws.onmessage = (event) => {
 
             if (targetCell) {
                 if (targetCell.status === 1 || targetCell.status === 3) {
-                    targetCell.status = 3;
+                    targetCell.status = 3; 
                     isHit = true;
-                    enemyHitsOnMe++;
+                    enemyHitsOnMe++; 
                 } else {
                     targetCell.status = 2; 
                 }
@@ -61,7 +69,7 @@ ws.onmessage = (event) => {
                 x: data.x,
                 y: data.y,
                 hit: isHit,
-                gameOver: enemyHitsOnMe >= 20
+                gameOver: enemyHitsOnMe >= 20 
             }));
 
             if (enemyHitsOnMe >= 20) {
@@ -69,9 +77,15 @@ ws.onmessage = (event) => {
                 statusElement.style.backgroundColor = '#ffcdd2';
                 isMyTurn = false;
             } else {
-                isMyTurn = true; 
-                statusElement.innerText = `Enemy ${isHit ? 'HIT' : 'missed'} at ${data.x}${data.y}. Your turn!`;
-                statusElement.style.backgroundColor = '#c8e6c9';
+                if (isHit) {
+                    isMyTurn = false;
+                    statusElement.innerText = `Enemy HIT at ${data.x}${data.y}! They get another turn.`;
+                    statusElement.style.backgroundColor = '#ffe082';
+                } else {
+                    isMyTurn = true;
+                    statusElement.innerText = `Enemy missed at ${data.x}${data.y}. Your turn!`;
+                    statusElement.style.backgroundColor = '#c8e6c9';
+                }
             }
         }
     } 
@@ -101,12 +115,14 @@ pivot = initWebDataRocks("#wdr-component", myBoardData, (x, y) => {
         alert("Game hasn't started yet! Wait for opponent.");
         return;
     }
-    if (!isMyTurn) {
+    if (!isMyTurn) { 
         alert("It's the opponent's turn! Please wait.");
         return;
     }
-    isMyTurn = false;
+    
+    isMyTurn = false; 
     statusElement.innerText = `Shooting at ${x}${y}...`;
+    
     ws.send(JSON.stringify({
         type: 'SHOOT',
         playerId: myPlayerId,

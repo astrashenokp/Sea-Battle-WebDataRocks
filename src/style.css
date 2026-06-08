@@ -17,6 +17,24 @@ body {
     background-color: #e0e0e0;
     display: inline-block;
     transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+.action-btn {
+    display: block; 
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #45a049;
 }
 
 #wdr-component { max-width: 500px; margin: 20px auto; }
@@ -31,6 +49,7 @@ body {
 .cell-ship { background-color: #78909c !important; }
 .cell-miss {
     background-color: #e0f7fa !important;
+    position: relative;
 }
 
 .cell-miss::after {
@@ -45,6 +64,7 @@ body {
 
 .cell-hit {
     background-color: #ffcdd2 !important;
+    position: relative;
 }
 
 .cell-hit::after {
