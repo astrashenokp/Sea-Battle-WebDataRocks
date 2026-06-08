@@ -14,17 +14,19 @@ wss.on('connection', (ws) => {
     if (players.length === 2) {
         console.log('Starting game with 2 players.');
         players.forEach((player, index) => {
-            player.send(JSON.stringify({ type: 'start', player: index + 1, message: 'Game started! You are Player ' + (index + 1) + 'Waiting for the other player.' }));
+            player.send(JSON.stringify({ 
+                type: 'start', 
+                player: index + 1, 
+                message: index === 0 ? 'Game started! Your turn (Player 1).' : 'Game started! Opponent\'s turn (Player 2).' 
+            }));
         });
     }
 
     ws.on('message', (message) => {
-        const parserMessage = JSON.parse(message);
-        console.log('Received message:', parserMessage);
-
+        const parsedMessage = JSON.parse(message);
         players.forEach((player) => {
             if (player !== ws && player.readyState === WebSocket.OPEN) {
-                player.send(JSON.stringify(parserMessage));
+                player.send(JSON.stringify(parsedMessage));
             }
         });
     });
@@ -34,9 +36,11 @@ wss.on('connection', (ws) => {
         console.log('Player disconnected. Total players:', players.length);
         
         players.forEach((player) => {
-            player.send(JSON.stringify({ type: 'disconnect', message: 'The other player has disconnected. Waiting for a new player...' }));
+            if (player.readyState === WebSocket.OPEN) {
+                player.send(JSON.stringify({ type: 'DISCONNECT', message: 'Opponent disconnected! Game over.' }));
+            }
         });
     });
 });
 
-console.log('WebSocket server is running');
+console.log('WebSocket server is running on ws://localhost:8080');

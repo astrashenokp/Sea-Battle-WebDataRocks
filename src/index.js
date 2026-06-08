@@ -4,17 +4,24 @@ import { generateRandomFleet, initWebDataRocks } from './gameBoard';
 console.log('Game client is running');
 
 const statusElement = document.getElementById('game-status');
-
 let myBoardData = generateRandomFleet();
 
 let pivot = null;
 let ws = null;
 let myPlayerId = null;
 
+let isMyTurn = false;
+let enemyHitsOnMe = 0;
+
+window.addEventListener('beforeunload', (e) => {
+    e.preventDefault();
+    e.returnValue = ''; 
+});
+
 ws = new WebSocket('ws://localhost:8080');
 
 ws.onopen = () => {
-    statusElement.innerText = 'Connected to server. Waiting for other player...';
+    statusElement.innerText = 'Connected! Waiting for opponent...';
     statusElement.style.backgroundColor = '#fff3e0';
 };
 
@@ -23,27 +30,60 @@ ws.onmessage = (event) => {
 
     if (data.type === 'start') {
         myPlayerId = data.player;
+        isMyTurn = (myPlayerId === 1);
         statusElement.innerText = data.message;
-        statusElement.style.backgroundColor = '#e8f5e9';
-        } 
+        statusElement.style.backgroundColor = isMyTurn ? '#c8e6c9' : '#ffe082';
+    } 
     else if (data.type === 'error' || data.type === 'DISCONNECT') {
         statusElement.innerText = data.message;
         statusElement.style.backgroundColor = '#ffebee';
+        isMyTurn = false;
     }
     else if (data.type === 'SHOOT') {
-        const targetCell = myBoardData.find(c => c.x === data.x && c.y === data.y);
-        if (targetCell) {
-            if (targetCell.status === 1 || targetCell.status === 3) {
-                targetCell.status = 3;
+        if (data.playerId !== myPlayerId) {
+            const targetCell = myBoardData.find(c => c.x === data.x && c.y === data.y);
+            let isHit = false;
+
+            if (targetCell) {
+                if (targetCell.status === 1 || targetCell.status === 3) {
+                    targetCell.status = 3;
+                    isHit = true;
+                    enemyHitsOnMe++;
                 } else {
-                targetCell.status = 2;
+                    targetCell.status = 2; 
+                }
+                pivot.updateData({ data: myBoardData });
             }
 
-            pivot.updateData({ data: myBoardData });
-            if (data.playerId === myPlayerId) {
-                statusElement.innerText = `You hit ${data.x}${data.y}!`;
-                } else {
-                statusElement.innerText = `Opponent hit ${data.x}${data.y}!`;
+            ws.send(JSON.stringify({
+                type: 'RESULT',
+                playerId: myPlayerId,
+                x: data.x,
+                y: data.y,
+                hit: isHit,
+                gameOver: enemyHitsOnMe >= 20
+            }));
+
+            if (enemyHitsOnMe >= 20) {
+                statusElement.innerText = 'FLEET DESTROYED! You lose...';
+                statusElement.style.backgroundColor = '#ffcdd2';
+                isMyTurn = false;
+            } else {
+                isMyTurn = true; 
+                statusElement.innerText = `Enemy ${isHit ? 'HIT' : 'missed'} at ${data.x}${data.y}. Your turn!`;
+                statusElement.style.backgroundColor = '#c8e6c9';
+            }
+        }
+    } 
+    else if (data.type === 'RESULT') {
+        if (data.playerId !== myPlayerId) {
+            if (data.gameOver) {
+                statusElement.innerText = 'VICTORY! Enemy fleet destroyed!';
+                statusElement.style.backgroundColor = '#c8e6c9';
+                isMyTurn = false;
+            } else {
+                statusElement.innerText = `You ${data.hit ? 'HIT' : 'missed'} at ${data.x}${data.y}! Waiting for opponent...`;
+                statusElement.style.backgroundColor = '#ffe082';
             }
         }
     }
@@ -51,10 +91,15 @@ ws.onmessage = (event) => {
 
 pivot = initWebDataRocks("#wdr-component", myBoardData, (x, y) => {
     if (!myPlayerId) {
-        alert('Game has not started yet!');
+        alert("Game hasn't started yet! Wait for opponent.");
         return;
     }
-
+    if (!isMyTurn) {
+        alert("It's the opponent's turn! Please wait.");
+        return;
+    }
+    isMyTurn = false;
+    statusElement.innerText = `Shooting at ${x}${y}...`;
     ws.send(JSON.stringify({
         type: 'SHOOT',
         playerId: myPlayerId,
