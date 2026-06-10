@@ -59,6 +59,9 @@ body {
     display: none;
     background-color: #f9a825;
     color: #1b1b1b;
+    position: relative;
+    z-index: 20;
+    cursor: pointer;
 }
 
 .play-again-btn:hover:not(:disabled) {

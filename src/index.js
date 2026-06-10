@@ -91,10 +91,10 @@ if (readyBtn) {
 
 if (playAgainBtn) {
     playAgainBtn.addEventListener('click', () => {
+        resetLocalGame();
+
         if (ws && ws.readyState === WebSocket.OPEN) {
             ws.send(JSON.stringify({ type: 'PLAY_AGAIN' }));
-        } else {
-            resetLocalGame();
         }
     });
 }
@@ -116,6 +116,7 @@ ws.onmessage = (event) => {
     if (data.type === 'connected') {
         statusElement.innerText = data.message;
         statusElement.style.backgroundColor = '#e3f2fd';
+        if (!gameStarted && !amIReady) showGameControls();
         if (!amIReady && readyBtn) readyBtn.disabled = false;
     }
     else if (data.type === 'OPPONENT_READY') {
