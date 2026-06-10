@@ -19,6 +19,13 @@ let enemyHitsOnMe = 0;
 let gameStarted = false;
 let amIReady = false;
 
+const bgMusic = new Audio('./music.mp3');
+bgMusic.loop = true;
+
+document.addEventListener('click', () => {
+    bgMusic.play().catch(() => {});
+}, { once: true });
+
 window.addEventListener('beforeunload', (e) => {
     e.preventDefault();
     e.returnValue = '';
