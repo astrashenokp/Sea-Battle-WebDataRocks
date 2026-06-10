@@ -55,6 +55,16 @@ body {
     background-color: #1e88e5;
 }
 
+.play-again-btn {
+    display: none;
+    background-color: #f9a825;
+    color: #1b1b1b;
+}
+
+.play-again-btn:hover:not(:disabled) {
+    background-color: #fbc02d;
+}
+
 .action-btn:disabled {
     background-color: #607d8b;
     opacity: 0.6;

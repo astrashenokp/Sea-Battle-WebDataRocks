@@ -88,6 +88,14 @@ wss.on('connection', (ws) => {
                     }
                 });
             }
+        } else if (parsedMessage.type === 'PLAY_AGAIN') {
+            players.forEach((player) => {
+                player.isReady = false;
+
+                if (player.readyState === WebSocket.OPEN) {
+                    player.send(JSON.stringify({ type: 'PLAY_AGAIN' }));
+                }
+            });
         } else {
             players.forEach((player) => {
                 if (player !== ws && player.readyState === WebSocket.OPEN) {

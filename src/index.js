@@ -4,6 +4,7 @@ import { generateRandomFleet, generateEmptyBoard, initWebDataRocks } from './gam
 const statusElement = document.getElementById('game-status');
 const randomizeBtn = document.getElementById('randomize-btn');
 const readyBtn = document.getElementById('ready-btn');
+const playAgainBtn = document.getElementById('play-again-btn');
 const controls = document.getElementById('controls');
 
 let myBoardData = generateRandomFleet();
@@ -23,6 +24,39 @@ const bgMusic = new Audio('./music.mp3');
 bgMusic.loop = true;
 
 const formatCoord = (x, y) => `(${x}, ${y})`;
+
+const showGameControls = () => {
+    if (controls) controls.style.display = 'flex';
+    if (randomizeBtn) randomizeBtn.style.display = '';
+    if (readyBtn) readyBtn.style.display = '';
+    if (playAgainBtn) playAgainBtn.style.display = 'none';
+};
+
+const showPlayAgain = () => {
+    if (controls) controls.style.display = 'flex';
+    if (randomizeBtn) randomizeBtn.style.display = 'none';
+    if (readyBtn) readyBtn.style.display = 'none';
+    if (playAgainBtn) playAgainBtn.style.display = 'inline-block';
+};
+
+const resetLocalGame = () => {
+    myBoardData = generateRandomFleet();
+    enemyBoardData = generateEmptyBoard();
+    myPlayerId = null;
+    isMyTurn = false;
+    enemyHitsOnMe = 0;
+    gameStarted = false;
+    amIReady = false;
+
+    if (myPivot) myPivot.updateData({ data: myBoardData });
+    if (enemyPivot) enemyPivot.updateData({ data: enemyBoardData });
+    if (randomizeBtn) randomizeBtn.disabled = false;
+    if (readyBtn) readyBtn.disabled = !(ws && ws.readyState === WebSocket.OPEN);
+
+    showGameControls();
+    statusElement.innerText = 'New round! Prepare your fleet and click Ready.';
+    statusElement.style.backgroundColor = '#e3f2fd';
+};
 
 document.addEventListener('click', () => {
     bgMusic.play().catch(() => {});
@@ -51,6 +85,16 @@ if (readyBtn) {
             statusElement.innerText = 'Waiting for opponent to get ready...';
             statusElement.style.backgroundColor = '#fff3e0';
             ws.send(JSON.stringify({ type: 'READY' }));
+        }
+    });
+}
+
+if (playAgainBtn) {
+    playAgainBtn.addEventListener('click', () => {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({ type: 'PLAY_AGAIN' }));
+        } else {
+            resetLocalGame();
         }
     });
 }
@@ -93,6 +137,10 @@ ws.onmessage = (event) => {
         statusElement.style.backgroundColor = '#ffebee';
         isMyTurn = false;
         gameStarted = false;
+        showPlayAgain();
+    }
+    else if (data.type === 'PLAY_AGAIN') {
+        resetLocalGame();
     }
     else if (data.type === 'SHOOT') {
         if (data.playerId !== myPlayerId) {
@@ -150,6 +198,8 @@ ws.onmessage = (event) => {
                 statusElement.innerText = 'FLEET DESTROYED! You lose...';
                 statusElement.style.backgroundColor = '#ffcdd2';
                 isMyTurn = false;
+                gameStarted = false;
+                showPlayAgain();
             } else {
                 if (isHit) {
                     isMyTurn = false;
@@ -184,6 +234,8 @@ ws.onmessage = (event) => {
                 statusElement.innerText = 'VICTORY! Enemy fleet destroyed!';
                 statusElement.style.backgroundColor = '#c8e6c9';
                 isMyTurn = false;
+                gameStarted = false;
+                showPlayAgain();
             } else {
                 if (data.hit) {
                     isMyTurn = true;
