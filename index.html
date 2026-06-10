@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea Battle</title>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>Sea Battle</h1>
+            <h2 id="game-status">Initializing game...</h2>
+            <div id="controls">
+                <button id="randomize-btn" class="action-btn">Generate Fleet</button>
+                <button id="ready-btn" class="action-btn ready-btn" disabled>Ready</button>
+            </div>
+        </div>
+        
+        <div class="boards-container">
+            <div id="board-mine" class="board"></div>
+            <div id="board-enemy" class="board"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
