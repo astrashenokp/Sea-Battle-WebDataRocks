@@ -16,7 +16,7 @@
   \*************************************************************/
 (module, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n// Imports\n\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, `body {\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    background-color: #0f2b46;\n    text-align: center;\n    margin: 0;\n    padding: 20px;\n    color: white;\n}\n\n.header {\n    margin-bottom: 20px;\n}\n\n#game-status {\n    color: #333;\n    padding: 12px 24px;\n    border-radius: 6px;\n    background-color: #e0e0e0;\n    display: inline-block;\n    margin-bottom: 15px;\n    font-size: 20px;\n    font-weight: bold;\n}\n\n#controls {\n    display: flex;\n    justify-content: center;\n    gap: 15px;\n    margin-bottom: 20px;\n}\n\n.action-btn {\n    padding: 10px 20px;\n    font-size: 16px;\n    background-color: #4CAF50;\n    color: white;\n    border: none;\n    border-radius: 5px;\n    cursor: pointer;\n}\n\n.action-btn:hover:not(:disabled) {\n    background-color: #45a049;\n}\n\n.ready-btn {\n    background-color: #2196F3;\n}\n\n.ready-btn:hover:not(:disabled) {\n    background-color: #1e88e5;\n}\n\n.action-btn:disabled {\n    background-color: #607d8b;\n    opacity: 0.6;\n    cursor: not-allowed;\n}\n\n.boards-container {\n    display: flex;\n    justify-content: center;\n    gap: 40px;\n    margin-top: 20px;\n}\n\n.board {\n    display: grid;\n    grid-template-columns: repeat(10, 40px);\n    grid-template-rows: repeat(10, 40px);\n    width: 400px;\n    height: 400px;\n    border: 2px solid #4a90d9;\n    background-color: #fff;\n}\n\n.board-cell {\n    width: 40px;\n    height: 40px;\n    border: 1px solid #5a8ab8;\n    box-sizing: border-box;\n}\n\n.cell-water {\n    background-color: #6fa8dc;\n}\n\n.cell-ship {\n    background-color: #8b4513;\n}\n\n.cell-miss {\n    background-color: #6fa8dc;\n    position: relative;\n}\n\n.cell-miss::after {\n    content: '•';\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    font-size: 24px;\n    color: #0f2b46;\n}\n\n.cell-hit {\n    background-color: #b71c1c;\n    position: relative;\n}\n\n.cell-hit::after {\n    content: '✖';\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    font-size: 18px;\n    color: white;\n}\n\n#board-enemy .cell-water {\n    cursor: crosshair;\n}\n\n#board-enemy .cell-water:hover {\n    background-color: #5c9cd6;\n}`, \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://sea-battle/./src/style.css?./node_modules/css-loader/dist/cjs.js\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/getUrl.js */ \"./node_modules/css-loader/dist/runtime/getUrl.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);\n// Imports\n\n\n\nvar ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ./image.png */ \"./src/image.png\"), __webpack_require__.b);\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\nvar ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, `body {\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    background-image: linear-gradient(rgba(15, 43, 70, 0.7), rgba(15, 43, 70, 0.7)), url(${___CSS_LOADER_URL_REPLACEMENT_0___});\n    background-size: cover;\n    background-position: center;\n    background-attachment: fixed;\n    background-repeat: no-repeat;\n    text-align: center;\n    margin: 0;\n    padding: 20px;\n    color: white;\n}\n\n.header {\n    margin-bottom: 20px;\n}\n\n#game-status {\n    color: #333;\n    padding: 12px 24px;\n    border-radius: 6px;\n    background-color: #e0e0e0;\n    display: inline-block;\n    margin-bottom: 15px;\n    font-size: 20px;\n    font-weight: bold;\n}\n\n#controls {\n    display: flex;\n    justify-content: center;\n    gap: 15px;\n    margin-bottom: 20px;\n}\n\n.action-btn {\n    padding: 10px 20px;\n    font-size: 16px;\n    background-color: #4CAF50;\n    color: white;\n    border: none;\n    border-radius: 5px;\n    cursor: pointer;\n}\n\n.action-btn:hover:not(:disabled) {\n    background-color: #45a049;\n}\n\n.ready-btn {\n    background-color: #2196F3;\n}\n\n.ready-btn:hover:not(:disabled) {\n    background-color: #1e88e5;\n}\n\n.action-btn:disabled {\n    background-color: #607d8b;\n    opacity: 0.6;\n    cursor: not-allowed;\n}\n\n.boards-container {\n    display: flex;\n    justify-content: center;\n    gap: 40px;\n    margin-top: 20px;\n}\n\n.board {\n    display: grid;\n    grid-template-columns: repeat(10, 40px);\n    grid-template-rows: repeat(10, 40px);\n    width: 400px;\n    height: 400px;\n    border: 2px solid #4a90d9;\n    background-color: #fff;\n}\n\n.board-cell {\n    width: 40px;\n    height: 40px;\n    border: 1px solid #5a8ab8;\n    box-sizing: border-box;\n}\n\n.cell-water {\n    background-color: #6fa8dc;\n}\n\n.cell-ship {\n    background-color: #8b4513;\n}\n\n.cell-miss {\n    background-color: #6fa8dc;\n    position: relative;\n}\n\n.cell-miss::after {\n    content: '•';\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    font-size: 24px;\n    color: #0f2b46;\n}\n\n.cell-hit {\n    background-color: #b71c1c;\n    position: relative;\n}\n\n.cell-hit::after {\n    content: '✖';\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    font-size: 18px;\n    color: white;\n}\n\n#board-enemy .cell-water {\n    cursor: crosshair;\n}\n\n#board-enemy .cell-water:hover {\n    background-color: #5c9cd6;\n}`, \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://sea-battle/./src/style.css?./node_modules/css-loader/dist/cjs.js\n}");
 
 /***/ },
 
@@ -27,6 +27,16 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (module) {
 
 eval("{\n\n/*\n  MIT License http://www.opensource.org/licenses/mit-license.php\n  Author Tobias Koppers @sokra\n*/\nmodule.exports = function (cssWithMappingToString) {\n  var list = [];\n\n  // return the list of modules as css string\n  list.toString = function toString() {\n    return this.map(function (item) {\n      var content = \"\";\n      var needLayer = typeof item[5] !== \"undefined\";\n      if (item[4]) {\n        content += \"@supports (\".concat(item[4], \") {\");\n      }\n      if (item[2]) {\n        content += \"@media \".concat(item[2], \" {\");\n      }\n      if (needLayer) {\n        content += \"@layer\".concat(item[5].length > 0 ? \" \".concat(item[5]) : \"\", \" {\");\n      }\n      content += cssWithMappingToString(item);\n      if (needLayer) {\n        content += \"}\";\n      }\n      if (item[2]) {\n        content += \"}\";\n      }\n      if (item[4]) {\n        content += \"}\";\n      }\n      return content;\n    }).join(\"\");\n  };\n\n  // import a list of modules into the list\n  list.i = function i(modules, media, dedupe, supports, layer) {\n    if (typeof modules === \"string\") {\n      modules = [[null, modules, undefined]];\n    }\n    var alreadyImportedModules = {};\n    if (dedupe) {\n      for (var k = 0; k < this.length; k++) {\n        var id = this[k][0];\n        if (id != null) {\n          alreadyImportedModules[id] = true;\n        }\n      }\n    }\n    for (var _k = 0; _k < modules.length; _k++) {\n      var item = [].concat(modules[_k]);\n      if (dedupe && alreadyImportedModules[item[0]]) {\n        continue;\n      }\n      if (typeof layer !== \"undefined\") {\n        if (typeof item[5] === \"undefined\") {\n          item[5] = layer;\n        } else {\n          item[1] = \"@layer\".concat(item[5].length > 0 ? \" \".concat(item[5]) : \"\", \" {\").concat(item[1], \"}\");\n          item[5] = layer;\n        }\n      }\n      if (media) {\n        if (!item[2]) {\n          item[2] = media;\n        } else {\n          item[1] = \"@media \".concat(item[2], \" {\").concat(item[1], \"}\");\n          item[2] = media;\n        }\n      }\n      if (supports) {\n        if (!item[4]) {\n          item[4] = \"\".concat(supports);\n        } else {\n          item[1] = \"@supports (\".concat(item[4], \") {\").concat(item[1], \"}\");\n          item[4] = supports;\n        }\n      }\n      list.push(item);\n    }\n  };\n  return list;\n};\n\n//# sourceURL=webpack://sea-battle/./node_modules/css-loader/dist/runtime/api.js?\n}");
+
+/***/ },
+
+/***/ "./node_modules/css-loader/dist/runtime/getUrl.js"
+/*!********************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
+  \********************************************************/
+(module) {
+
+eval("{\n\nmodule.exports = function (url, options) {\n  if (!options) {\n    options = {};\n  }\n  if (!url) {\n    return url;\n  }\n  url = String(url.__esModule ? url.default : url);\n\n  // If url is already wrapped in quotes, remove them\n  if (/^['\"].*['\"]$/.test(url)) {\n    url = url.slice(1, -1);\n  }\n  if (options.hash) {\n    url += options.hash;\n  }\n\n  // Should url be wrapped?\n  // See https://drafts.csswg.org/css-values-3/#urls\n  if (/[\"'() \\t\\n]|(%20)/.test(url) || options.needQuotes) {\n    return \"\\\"\".concat(url.replace(/\"/g, '\\\\\"').replace(/\\n/g, \"\\\\n\"), \"\\\"\");\n  }\n  return url;\n};\n\n//# sourceURL=webpack://sea-battle/./node_modules/css-loader/dist/runtime/getUrl.js?\n}");
 
 /***/ },
 
@@ -128,6 +138,16 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 
 eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _gameBoard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gameBoard */ \"./src/gameBoard.js\");\n\n\n\nconst statusElement = document.getElementById('game-status');\nconst randomizeBtn = document.getElementById('randomize-btn');\nconst readyBtn = document.getElementById('ready-btn');\nconst controls = document.getElementById('controls');\n\nlet myBoardData = (0,_gameBoard__WEBPACK_IMPORTED_MODULE_1__.generateRandomFleet)();\nlet enemyBoardData = (0,_gameBoard__WEBPACK_IMPORTED_MODULE_1__.generateEmptyBoard)();\n\nlet myBoard = null;\nlet enemyBoard = null;\nlet ws = null;\nlet myPlayerId = null;\n\nlet isMyTurn = false;\nlet enemyHitsOnMe = 0;\nlet gameStarted = false;\nlet amIReady = false;\n\nwindow.addEventListener('beforeunload', (e) => {\n    e.preventDefault();\n    e.returnValue = '';\n});\n\nif (randomizeBtn) {\n    randomizeBtn.addEventListener('click', () => {\n        if (!amIReady && !gameStarted) {\n            myBoardData = (0,_gameBoard__WEBPACK_IMPORTED_MODULE_1__.generateRandomFleet)();\n            myBoard.updateData(myBoardData);\n        }\n    });\n}\n\nif (readyBtn) {\n    readyBtn.addEventListener('click', () => {\n        if (ws && ws.readyState === WebSocket.OPEN) {\n            amIReady = true;\n            randomizeBtn.disabled = true;\n            readyBtn.disabled = true;\n            statusElement.innerText = 'Waiting for opponent to get ready...';\n            statusElement.style.backgroundColor = '#fff3e0';\n            ws.send(JSON.stringify({ type: 'READY' }));\n        }\n    });\n}\n\nws = new WebSocket('ws://localhost:8080');\n\nws.onopen = () => {\n    statusElement.innerText = 'Connected! Waiting for opponent...';\n    statusElement.style.backgroundColor = '#fff3e0';\n};\n\nws.onmessage = (event) => {\n    const data = JSON.parse(event.data);\n\n    if (data.type === 'connected') {\n        statusElement.innerText = data.message;\n        statusElement.style.backgroundColor = '#e3f2fd';\n        if (!amIReady && readyBtn) readyBtn.disabled = false;\n    }\n    else if (data.type === 'OPPONENT_READY') {\n        if (!amIReady) {\n            statusElement.innerText = 'Opponent is ready! Click Ready to start.';\n            statusElement.style.backgroundColor = '#fff9c4';\n        }\n    }\n    else if (data.type === 'start') {\n        gameStarted = true;\n        myPlayerId = data.player;\n        isMyTurn = (myPlayerId === 1);\n        statusElement.innerText = data.message;\n        statusElement.style.backgroundColor = isMyTurn ? '#c8e6c9' : '#ffe082';\n        if (controls) controls.style.display = 'none';\n    }\n    else if (data.type === 'error' || data.type === 'DISCONNECT') {\n        statusElement.innerText = data.message;\n        statusElement.style.backgroundColor = '#ffebee';\n        isMyTurn = false;\n        gameStarted = false;\n    }\n    else if (data.type === 'SHOOT') {\n        if (data.playerId !== myPlayerId) {\n            const targetCell = myBoardData.find(c => c.x === data.x && c.y === data.y);\n            let isHit = false;\n            let sunkSurrounding = [];\n\n            if (targetCell) {\n                if (targetCell.status === 1 || targetCell.status === 3) {\n                    targetCell.status = 3;\n                    isHit = true;\n                    enemyHitsOnMe++;\n\n                    if (targetCell.shipId) {\n                        const shipCells = myBoardData.filter(c => c.shipId === targetCell.shipId);\n                        const isSunk = shipCells.every(c => c.status === 3);\n\n                        if (isSunk) {\n                            shipCells.forEach(sc => {\n                                const shipX = parseInt(sc.x);\n                                const shipY = parseInt(sc.y);\n                                for (let dx = -1; dx <= 1; dx++) {\n                                    for (let dy = -1; dy <= 1; dy++) {\n                                        const nx = shipX + dx;\n                                        const ny = shipY + dy;\n                                        if (nx >= 1 && nx <= 10 && ny >= 1 && ny <= 10) {\n                                            const adjCell = myBoardData.find(c => c.x === String(nx) && c.y === String(ny));\n                                            if (adjCell && adjCell.status === 0) {\n                                                adjCell.status = 2;\n                                                sunkSurrounding.push({ x: adjCell.x, y: adjCell.y });\n                                            }\n                                        }\n                                    }\n                                }\n                            });\n                        }\n                    }\n                } else {\n                    targetCell.status = 2;\n                }\n                myBoard.updateData(myBoardData);\n            }\n\n            ws.send(JSON.stringify({\n                type: 'RESULT',\n                playerId: myPlayerId,\n                x: data.x,\n                y: data.y,\n                hit: isHit,\n                gameOver: enemyHitsOnMe >= 20,\n                sunkSurrounding: sunkSurrounding\n            }));\n\n            if (enemyHitsOnMe >= 20) {\n                statusElement.innerText = 'FLEET DESTROYED! You lose...';\n                statusElement.style.backgroundColor = '#ffcdd2';\n                isMyTurn = false;\n            } else {\n                if (isHit) {\n                    isMyTurn = false;\n                    statusElement.innerText = `Enemy HIT at ${data.x}${data.y}! They get another turn.`;\n                    statusElement.style.backgroundColor = '#ffe082';\n                } else {\n                    isMyTurn = true;\n                    statusElement.innerText = `Enemy missed at ${data.x}${data.y}. Your turn!`;\n                    statusElement.style.backgroundColor = '#c8e6c9';\n                }\n            }\n        }\n    }\n    else if (data.type === 'RESULT') {\n        if (data.playerId !== myPlayerId) {\n            const targetCell = enemyBoardData.find(c => c.x === data.x && c.y === data.y);\n            if (targetCell) {\n                targetCell.status = data.hit ? 3 : 2;\n            }\n\n            if (data.sunkSurrounding && data.sunkSurrounding.length > 0) {\n                data.sunkSurrounding.forEach(coord => {\n                    const adjCell = enemyBoardData.find(c => c.x === coord.x && c.y === coord.y);\n                    if (adjCell) {\n                        adjCell.status = 2;\n                    }\n                });\n            }\n            enemyBoard.updateData(enemyBoardData);\n\n            if (data.gameOver) {\n                statusElement.innerText = 'VICTORY! Enemy fleet destroyed!';\n                statusElement.style.backgroundColor = '#c8e6c9';\n                isMyTurn = false;\n            } else {\n                if (data.hit) {\n                    isMyTurn = true;\n                    statusElement.innerText = `You HIT at ${data.x}${data.y}! Shoot again!`;\n                    statusElement.style.backgroundColor = '#c8e6c9';\n                } else {\n                    isMyTurn = false;\n                    statusElement.innerText = `You missed at ${data.x}${data.y}. Waiting for opponent...`;\n                    statusElement.style.backgroundColor = '#ffe082';\n                }\n            }\n        }\n    }\n};\n\nmyBoard = (0,_gameBoard__WEBPACK_IMPORTED_MODULE_1__.initBoard)('#board-mine', myBoardData, null);\n\nenemyBoard = (0,_gameBoard__WEBPACK_IMPORTED_MODULE_1__.initBoard)('#board-enemy', enemyBoardData, (x, y) => {\n    if (!gameStarted) {\n        alert(\"Game hasn't started yet! Press Ready and wait for opponent.\");\n        return;\n    }\n    if (!isMyTurn) {\n        alert(\"It's the opponent's turn! Please wait.\");\n        return;\n    }\n\n    isMyTurn = false;\n    statusElement.innerText = `Shooting at ${x}${y}...`;\n    statusElement.style.backgroundColor = '#e3f2fd';\n\n    ws.send(JSON.stringify({\n        type: 'SHOOT',\n        playerId: myPlayerId,\n        x: x,\n        y: y\n    }));\n});\n\n//# sourceURL=webpack://sea-battle/./src/index.js?\n}");
 
+/***/ },
+
+/***/ "./src/image.png"
+/*!***********************!*\
+  !*** ./src/image.png ***!
+  \***********************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+eval("{module.exports = __webpack_require__.p + \"b224545ade0fe6bdd295.png\";\n\n//# sourceURL=webpack://sea-battle/./src/image.png?\n}");
+
 /***/ }
 
 /******/ 	});
@@ -162,6 +182,9 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _st
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -187,6 +210,18 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _st
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -201,6 +236,55 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _st
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript && document.currentScript.tagName.toUpperCase() === 'SCRIPT')
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/^blob:/, "").replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		__webpack_require__.b = (typeof document !== 'undefined' && document.baseURI) || self.location.href;
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"main": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		// no on chunks loaded
+/******/ 		
+/******/ 		// no jsonp function
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/nonce */
