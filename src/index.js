@@ -1,5 +1,5 @@
 import './style.css';
-import { generateRandomFleet, initWebDataRocks } from './gameBoard';
+import { generateRandomFleet, generateEmptyBoard, initBoard } from './gameBoard';
 
 const statusElement = document.getElementById('game-status');
 const randomizeBtn = document.getElementById('randomize-btn');
@@ -7,25 +7,28 @@ const readyBtn = document.getElementById('ready-btn');
 const controls = document.getElementById('controls');
 
 let myBoardData = generateRandomFleet();
-let pivot = null;
+let enemyBoardData = generateEmptyBoard();
+
+let myBoard = null;
+let enemyBoard = null;
 let ws = null;
 let myPlayerId = null;
 
 let isMyTurn = false;
-let enemyHitsOnMe = 0; 
+let enemyHitsOnMe = 0;
 let gameStarted = false;
 let amIReady = false;
 
 window.addEventListener('beforeunload', (e) => {
     e.preventDefault();
-    e.returnValue = ''; 
+    e.returnValue = '';
 });
 
 if (randomizeBtn) {
     randomizeBtn.addEventListener('click', () => {
         if (!amIReady && !gameStarted) {
             myBoardData = generateRandomFleet();
-            pivot.updateData({ data: myBoardData });
+            myBoard.updateData(myBoardData);
         }
     });
 }
@@ -48,7 +51,6 @@ ws = new WebSocket('ws://localhost:8080');
 ws.onopen = () => {
     statusElement.innerText = 'Connected! Waiting for opponent...';
     statusElement.style.backgroundColor = '#fff3e0';
-    if (readyBtn) readyBtn.disabled = true;
 };
 
 ws.onmessage = (event) => {
@@ -68,15 +70,15 @@ ws.onmessage = (event) => {
     else if (data.type === 'start') {
         gameStarted = true;
         myPlayerId = data.player;
-        isMyTurn = (myPlayerId === 1); 
+        isMyTurn = (myPlayerId === 1);
         statusElement.innerText = data.message;
         statusElement.style.backgroundColor = isMyTurn ? '#c8e6c9' : '#ffe082';
         if (controls) controls.style.display = 'none';
-    } 
+    }
     else if (data.type === 'error' || data.type === 'DISCONNECT') {
         statusElement.innerText = data.message;
         statusElement.style.backgroundColor = '#ffebee';
-        isMyTurn = false; 
+        isMyTurn = false;
         gameStarted = false;
     }
     else if (data.type === 'SHOOT') {
@@ -86,13 +88,13 @@ ws.onmessage = (event) => {
 
             if (targetCell) {
                 if (targetCell.status === 1 || targetCell.status === 3) {
-                    targetCell.status = 3; 
+                    targetCell.status = 3;
                     isHit = true;
-                    enemyHitsOnMe++; 
+                    enemyHitsOnMe++;
                 } else {
-                    targetCell.status = 2; 
+                    targetCell.status = 2;
                 }
-                pivot.updateData({ data: myBoardData });
+                myBoard.updateData(myBoardData);
             }
 
             ws.send(JSON.stringify({
@@ -101,7 +103,7 @@ ws.onmessage = (event) => {
                 x: data.x,
                 y: data.y,
                 hit: isHit,
-                gameOver: enemyHitsOnMe >= 20 
+                gameOver: enemyHitsOnMe >= 20
             }));
 
             if (enemyHitsOnMe >= 20) {
@@ -120,20 +122,26 @@ ws.onmessage = (event) => {
                 }
             }
         }
-    } 
+    }
     else if (data.type === 'RESULT') {
         if (data.playerId !== myPlayerId) {
+            const targetCell = enemyBoardData.find(c => c.x === data.x && c.y === data.y);
+            if (targetCell) {
+                targetCell.status = data.hit ? 3 : 2;
+                enemyBoard.updateData(enemyBoardData);
+            }
+
             if (data.gameOver) {
                 statusElement.innerText = 'VICTORY! Enemy fleet destroyed!';
                 statusElement.style.backgroundColor = '#c8e6c9';
                 isMyTurn = false;
             } else {
                 if (data.hit) {
-                    isMyTurn = true; 
+                    isMyTurn = true;
                     statusElement.innerText = `You HIT at ${data.x}${data.y}! Shoot again!`;
                     statusElement.style.backgroundColor = '#c8e6c9';
                 } else {
-                    isMyTurn = false; 
+                    isMyTurn = false;
                     statusElement.innerText = `You missed at ${data.x}${data.y}. Waiting for opponent...`;
                     statusElement.style.backgroundColor = '#ffe082';
                 }
@@ -142,19 +150,22 @@ ws.onmessage = (event) => {
     }
 };
 
-pivot = initWebDataRocks("#wdr-component", myBoardData, (x, y) => {
+myBoard = initBoard('#board-mine', myBoardData, null);
+
+enemyBoard = initBoard('#board-enemy', enemyBoardData, (x, y) => {
     if (!gameStarted) {
         alert("Game hasn't started yet! Press Ready and wait for opponent.");
         return;
     }
-    if (!isMyTurn) { 
+    if (!isMyTurn) {
         alert("It's the opponent's turn! Please wait.");
         return;
     }
-    
-    isMyTurn = false; 
+
+    isMyTurn = false;
     statusElement.innerText = `Shooting at ${x}${y}...`;
-    
+    statusElement.style.backgroundColor = '#e3f2fd';
+
     ws.send(JSON.stringify({
         type: 'SHOOT',
         playerId: myPlayerId,
