@@ -85,12 +85,38 @@ ws.onmessage = (event) => {
         if (data.playerId !== myPlayerId) {
             const targetCell = myBoardData.find(c => c.x === data.x && c.y === data.y);
             let isHit = false;
+            let sunkSurrounding = [];
 
             if (targetCell) {
                 if (targetCell.status === 1 || targetCell.status === 3) {
                     targetCell.status = 3;
                     isHit = true;
                     enemyHitsOnMe++;
+
+                    if (targetCell.shipId) {
+                        const shipCells = myBoardData.filter(c => c.shipId === targetCell.shipId);
+                        const isSunk = shipCells.every(c => c.status === 3);
+
+                        if (isSunk) {
+                            shipCells.forEach(sc => {
+                                const shipX = parseInt(sc.x);
+                                const shipY = parseInt(sc.y);
+                                for (let dx = -1; dx <= 1; dx++) {
+                                    for (let dy = -1; dy <= 1; dy++) {
+                                        const nx = shipX + dx;
+                                        const ny = shipY + dy;
+                                        if (nx >= 1 && nx <= 10 && ny >= 1 && ny <= 10) {
+                                            const adjCell = myBoardData.find(c => c.x === String(nx) && c.y === String(ny));
+                                            if (adjCell && adjCell.status === 0) {
+                                                adjCell.status = 2;
+                                                sunkSurrounding.push({ x: adjCell.x, y: adjCell.y });
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
                 } else {
                     targetCell.status = 2;
                 }
@@ -103,7 +129,8 @@ ws.onmessage = (event) => {
                 x: data.x,
                 y: data.y,
                 hit: isHit,
-                gameOver: enemyHitsOnMe >= 20
+                gameOver: enemyHitsOnMe >= 20,
+                sunkSurrounding: sunkSurrounding
             }));
 
             if (enemyHitsOnMe >= 20) {
@@ -128,8 +155,17 @@ ws.onmessage = (event) => {
             const targetCell = enemyBoardData.find(c => c.x === data.x && c.y === data.y);
             if (targetCell) {
                 targetCell.status = data.hit ? 3 : 2;
-                enemyBoard.updateData(enemyBoardData);
             }
+
+            if (data.sunkSurrounding && data.sunkSurrounding.length > 0) {
+                data.sunkSurrounding.forEach(coord => {
+                    const adjCell = enemyBoardData.find(c => c.x === coord.x && c.y === coord.y);
+                    if (adjCell) {
+                        adjCell.status = 2;
+                    }
+                });
+            }
+            enemyBoard.updateData(enemyBoardData);
 
             if (data.gameOver) {
                 statusElement.innerText = 'VICTORY! Enemy fleet destroyed!';

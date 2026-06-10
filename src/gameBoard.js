@@ -1,6 +1,7 @@
 export function generateRandomFleet() {
     let grid = Array.from({ length: 10 }, () => Array(10).fill(0));
     const fleet = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1];
+    let shipId = 1;
 
     const canPlace = (r, c, size, isVertical) => {
         if (isVertical && r + size > 10) return false;
@@ -11,7 +12,7 @@ export function generateRandomFleet() {
                 let checkR = r + (isVertical ? i : j);
                 let checkC = c + (isVertical ? j : i);
                 if (checkR >= 0 && checkR < 10 && checkC >= 0 && checkC < 10) {
-                    if (grid[checkR][checkC] === 1) return false;
+                    if (grid[checkR][checkC] > 0) return false;
                 }
             }
         }
@@ -26,9 +27,10 @@ export function generateRandomFleet() {
             let c = Math.floor(Math.random() * 10);
             if (canPlace(r, c, size, isVertical)) {
                 for (let i = 0; i < size; i++) {
-                    if (isVertical) grid[r + i][c] = 1;
-                    else grid[r][c + i] = 1;
+                    if (isVertical) grid[r + i][c] = shipId;
+                    else grid[r][c + i] = shipId;
                 }
+                shipId++;
                 placed = true;
             }
         }
@@ -37,7 +39,8 @@ export function generateRandomFleet() {
     const data = [];
     for (let r = 0; r < 10; r++) {
         for (let c = 0; c < 10; c++) {
-            data.push({ x: String(c + 1), y: String(r + 1), status: grid[r][c] });
+            const id = grid[r][c];
+            data.push({ x: String(c + 1), y: String(r + 1), status: id > 0 ? 1 : 0, shipId: id > 0 ? id : null });
         }
     }
     return data;
