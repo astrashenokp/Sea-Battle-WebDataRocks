@@ -53,7 +53,7 @@ if (readyBtn) {
     });
 }
 
-ws = new WebSocket('https://sea-battle-webdatarocks.onrender.com');
+ws = new WebSocket('ws://localhost:8080');
 
 ws.onopen = () => {
     statusElement.innerText = 'Connected! Waiting for opponent...';
