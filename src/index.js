@@ -1,5 +1,5 @@
 import './style.css';
-import { generateRandomFleet, generateEmptyBoard, initBoard } from './gameBoard';
+import { generateRandomFleet, generateEmptyBoard, initWebDataRocks } from './gameBoard';
 
 const statusElement = document.getElementById('game-status');
 const randomizeBtn = document.getElementById('randomize-btn');
@@ -9,8 +9,8 @@ const controls = document.getElementById('controls');
 let myBoardData = generateRandomFleet();
 let enemyBoardData = generateEmptyBoard();
 
-let myBoard = null;
-let enemyBoard = null;
+let myPivot = null;
+let enemyPivot = null;
 let ws = null;
 let myPlayerId = null;
 
@@ -21,6 +21,8 @@ let amIReady = false;
 
 const bgMusic = new Audio('./music.mp3');
 bgMusic.loop = true;
+
+const formatCoord = (x, y) => `(${x}, ${y})`;
 
 document.addEventListener('click', () => {
     bgMusic.play().catch(() => {});
@@ -35,7 +37,7 @@ if (randomizeBtn) {
     randomizeBtn.addEventListener('click', () => {
         if (!amIReady && !gameStarted) {
             myBoardData = generateRandomFleet();
-            myBoard.updateData(myBoardData);
+            myPivot.updateData({ data: myBoardData });
         }
     });
 }
@@ -53,7 +55,11 @@ if (readyBtn) {
     });
 }
 
-ws = new WebSocket('ws://localhost:8080');
+const wsUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'ws://localhost:8080'
+    : 'wss://YOUR_RENDER_APP_NAME.onrender.com';
+
+ws = new WebSocket(wsUrl);
 
 ws.onopen = () => {
     statusElement.innerText = 'Connected! Waiting for opponent...';
@@ -127,7 +133,7 @@ ws.onmessage = (event) => {
                 } else {
                     targetCell.status = 2;
                 }
-                myBoard.updateData(myBoardData);
+                myPivot.updateData({ data: myBoardData });
             }
 
             ws.send(JSON.stringify({
@@ -147,11 +153,11 @@ ws.onmessage = (event) => {
             } else {
                 if (isHit) {
                     isMyTurn = false;
-                    statusElement.innerText = `Enemy HIT at ${data.x}${data.y}! They get another turn.`;
+                    statusElement.innerText = `Enemy HIT at ${formatCoord(data.x, data.y)}! They get another turn.`;
                     statusElement.style.backgroundColor = '#ffe082';
                 } else {
                     isMyTurn = true;
-                    statusElement.innerText = `Enemy missed at ${data.x}${data.y}. Your turn!`;
+                    statusElement.innerText = `Enemy missed at ${formatCoord(data.x, data.y)}. Your turn!`;
                     statusElement.style.backgroundColor = '#c8e6c9';
                 }
             }
@@ -172,7 +178,7 @@ ws.onmessage = (event) => {
                     }
                 });
             }
-            enemyBoard.updateData(enemyBoardData);
+            enemyPivot.updateData({ data: enemyBoardData });
 
             if (data.gameOver) {
                 statusElement.innerText = 'VICTORY! Enemy fleet destroyed!';
@@ -181,11 +187,11 @@ ws.onmessage = (event) => {
             } else {
                 if (data.hit) {
                     isMyTurn = true;
-                    statusElement.innerText = `You HIT at ${data.x}${data.y}! Shoot again!`;
+                    statusElement.innerText = `You HIT at ${formatCoord(data.x, data.y)}! Shoot again!`;
                     statusElement.style.backgroundColor = '#c8e6c9';
                 } else {
                     isMyTurn = false;
-                    statusElement.innerText = `You missed at ${data.x}${data.y}. Waiting for opponent...`;
+                    statusElement.innerText = `You missed at ${formatCoord(data.x, data.y)}. Waiting for opponent...`;
                     statusElement.style.backgroundColor = '#ffe082';
                 }
             }
@@ -193,9 +199,9 @@ ws.onmessage = (event) => {
     }
 };
 
-myBoard = initBoard('#board-mine', myBoardData, null);
+myPivot = initWebDataRocks("#board-mine", myBoardData, null);
 
-enemyBoard = initBoard('#board-enemy', enemyBoardData, (x, y) => {
+enemyPivot = initWebDataRocks("#board-enemy", enemyBoardData, (x, y) => {
     if (!gameStarted) {
         alert("Game hasn't started yet! Press Ready and wait for opponent.");
         return;
@@ -206,7 +212,7 @@ enemyBoard = initBoard('#board-enemy', enemyBoardData, (x, y) => {
     }
 
     isMyTurn = false;
-    statusElement.innerText = `Shooting at ${x}${y}...`;
+    statusElement.innerText = `Shooting at ${formatCoord(x, y)}...`;
     statusElement.style.backgroundColor = '#e3f2fd';
 
     ws.send(JSON.stringify({
