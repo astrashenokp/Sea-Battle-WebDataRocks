@@ -57,7 +57,7 @@ if (readyBtn) {
 
 const wsUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
     ? 'ws://localhost:8080'
-    : 'wss://YOUR_RENDER_APP_NAME.onrender.com';
+    : `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}`;
 
 ws = new WebSocket(wsUrl);
 

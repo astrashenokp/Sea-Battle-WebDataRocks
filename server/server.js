@@ -1,6 +1,57 @@
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 });
+
+const port = process.env.PORT || 8080;
+const distDir = path.join(__dirname, '..', 'dist');
+
+const contentTypes = {
+    '.html': 'text/html; charset=utf-8',
+    '.js': 'text/javascript; charset=utf-8',
+    '.css': 'text/css; charset=utf-8',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.mp3': 'audio/mpeg'
+};
+
+const server = http.createServer((req, res) => {
+    const requestPath = req.url === '/' ? '/index.html' : decodeURIComponent(req.url.split('?')[0]);
+    const filePath = path.join(distDir, requestPath);
+    const resolvedPath = path.resolve(filePath);
+
+    if (!resolvedPath.startsWith(path.resolve(distDir))) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+    }
+
+    fs.readFile(resolvedPath, (error, content) => {
+        if (error) {
+            fs.readFile(path.join(distDir, 'index.html'), (fallbackError, fallbackContent) => {
+                if (fallbackError) {
+                    res.writeHead(404);
+                    res.end('Not found');
+                    return;
+                }
+
+                res.writeHead(200, { 'Content-Type': contentTypes['.html'] });
+                res.end(fallbackContent);
+            });
+            return;
+        }
+
+        res.writeHead(200, {
+            'Content-Type': contentTypes[path.extname(resolvedPath)] || 'application/octet-stream'
+        });
+        res.end(content);
+    });
+});
+
+const wss = new WebSocket.Server({ server });
 let players = [];
+
 wss.on('connection', (ws) => {
     if (players.length >= 2) {
         ws.send(JSON.stringify({ type: 'error', message: 'Room is full. Game is already in progress.' }));
@@ -54,4 +105,8 @@ wss.on('connection', (ws) => {
             }
         });
     });
+});
+
+server.listen(port, '0.0.0.0', () => {
+    console.log(`Sea Battle server listening on port ${port}`);
 });
