@@ -1,4 +1,8 @@
 const WebSocket = require('ws');
+const port = process.env.PORT || 8080;
+const wss = new WebSocket.Server({ port });
+
+const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080 });
 let players = [];
 wss.on('connection', (ws) => {
