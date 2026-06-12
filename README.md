@@ -1,77 +1,76 @@
 # Sea Battle WebDataRocks
 
-Це браузерна гра "Морський бій" для двох гравців.
-Гравці підключаються до однієї кімнати, генерують свої кораблі,
-натискають Ready і по черзі стріляють по полю суперника.
+This is a browser game based on the classic Sea Battle game for two players.
+Players connect to the same room, generate their fleets, click Ready, and take turns shooting at the opponent's board.
 
-Для відображення ігрового поля використовується WebDataRocks.
-Обмін ходами між двома гравцями працює через WebSocket-сервер.
+The game board is displayed with WebDataRocks.
+The moves between two players are sent through a WebSocket server.
 
-## Що є у проєкті
+## Features
 
-- випадкова генерація флоту;
-- два поля: своє поле і поле суперника;
-- кнопки Generate Fleet, Ready і Play Again;
-- передача ходів між двома гравцями через сервер;
-- показ влучань, промахів і завершення гри.
+- random fleet generation;
+- two boards: your board and the opponent's board;
+- Generate Fleet, Ready, and Play Again buttons;
+- real-time moves between two players;
+- hit, miss, and game over states.
 
-## Технології
+## Technologies
 
 - JavaScript;
-- HTML і CSS;
+- HTML and CSS;
 - Webpack;
 - Node.js;
 - WebSocket;
 - WebDataRocks.
 
-## Як запустити проєкт
+## How to Run
 
-Спочатку потрібно встановити залежності:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-Потім зібрати клієнтську частину:
+Build the client files:
 
 ```bash
 npm run build
 ```
 
-Після цього запустити сервер:
+Start the server:
 
 ```bash
 npm start
 ```
 
-Сайт буде доступний у браузері:
+Open the game in the browser:
 
 ```text
 http://localhost:8080
 ```
 
-Щоб пограти удвох локально, відкрий цю адресу у двох вкладках або у двох різних браузерах.
+To play locally with two players, open this address in two browser tabs or in two different browsers.
 
-## Як грати
+## How to Play
 
-1. Відкрий гру у двох вкладках.
-2. Натисни Generate Fleet, якщо хочеш змінити розташування кораблів.
-3. Натисни Ready в обох вкладках.
-4. Коли гра почнеться, стріляй по полю суперника.
-5. Перемагає той, хто першим знищить усі кораблі суперника.
+1. Open the game in two tabs.
+2. Click Generate Fleet if you want to change your ship positions.
+3. Click Ready in both tabs.
+4. When the game starts, shoot at the opponent's board.
+5. The player who destroys all opponent ships first wins.
 
-## Структура проєкту
+## Project Structure
 
 ```text
 src/
-  index.js       головна логіка гри
-  gameBoard.js   створення і відображення поля
-  style.css      стилі гри
+  index.js       main game logic
+  gameBoard.js   board creation and rendering
+  style.css      game styles
 
 server/
-  server.js      сервер для гри і WebSocket
+  server.js      game server and WebSocket logic
 
 dist/
-  index.html     готова сторінка
-  main.js        зібраний JavaScript
+  index.html     ready HTML page
+  main.js        bundled JavaScript
 ```
