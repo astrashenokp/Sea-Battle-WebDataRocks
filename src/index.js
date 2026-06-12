@@ -150,7 +150,7 @@ ws.onmessage = (event) => {
             let sunkSurrounding = [];
 
             if (targetCell) {
-                if (targetCell.status === 1 || targetCell.status === 3) {
+                if (targetCell.status === 1) {
                     targetCell.status = 3;
                     isHit = true;
                     enemyHitsOnMe++;
@@ -179,7 +179,9 @@ ws.onmessage = (event) => {
                             });
                         }
                     }
-                } else {
+                } else if (targetCell.status === 3) {
+                    isHit = true;
+                } else if (targetCell.status === 0) {
                     targetCell.status = 2;
                 }
                 myPivot.updateData({ data: myBoardData });
@@ -261,6 +263,12 @@ enemyPivot = initWebDataRocks("#board-enemy", enemyBoardData, (x, y) => {
     }
     if (!isMyTurn) {
         alert("It's the opponent's turn! Please wait.");
+        return;
+    }
+
+    const targetCell = enemyBoardData.find(c => c.x === x && c.y === y);
+    if (targetCell && (targetCell.status === 2 || targetCell.status === 3)) {
+        alert("You already shot there. Choose another cell.");
         return;
     }
 
