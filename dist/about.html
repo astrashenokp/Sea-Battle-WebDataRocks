@@ -191,6 +191,36 @@
             color: #7ec8f8;
         }
 
+        .online-banner {
+            background: rgba(21, 101, 192, 0.25);
+            border: 1px solid rgba(126, 200, 248, 0.35);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .online-banner-text { font-size: 0.95rem; color: #c8dced; line-height: 1.5; }
+        .online-banner-text strong { color: #ffffff; }
+        .online-banner-text small { display: block; margin-top: 4px; color: #7ec8f8; font-size: 0.82rem; }
+        .online-link {
+            display: inline-block;
+            padding: 10px 22px;
+            background: #1565c0;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.93rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background 0.15s;
+            flex-shrink: 0;
+        }
+        .online-link:hover { background: #1e88e5; }
+
         .play-btn {
             display: inline-block;
             margin-top: 32px;
@@ -219,6 +249,14 @@
 
     <h1>Sea Battle</h1>
     <p class="subtitle">WebDataRocks Edition — real-time multiplayer Battleship in the browser</p>
+
+    <div class="online-banner">
+        <div class="online-banner-text">
+            <strong>Play online — no install needed</strong>
+            <small>Room holds exactly 2 players. Open in two tabs or share with a friend.</small>
+        </div>
+        <a href="https://sea-battle-webdatarocks.onrender.com" class="online-link" target="_blank">Play Now →</a>
+    </div>
 
     <!-- What is this -->
     <section>
@@ -376,7 +414,7 @@
         </ul>
     </section>
 
-    <a href="index.html" class="play-btn">Play Now</a>
+    <a href="https://sea-battle-webdatarocks.onrender.com" class="play-btn" target="_blank">Play Now →</a>
 
 </div>
 </body>
