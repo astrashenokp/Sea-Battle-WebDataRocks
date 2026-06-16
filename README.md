@@ -137,9 +137,3 @@ dist/
   main.js         Webpack bundle
   music.mp3       background music
 ```
-
----
-
-## License
-
-MIT
