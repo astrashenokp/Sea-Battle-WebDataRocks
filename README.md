@@ -2,6 +2,19 @@
 
 A real-time multiplayer Battleship game running in the browser, where the 10×10 game boards are rendered using **WebDataRocks** pivot tables as an unconventional rendering engine.
 
+---
+
+## Screenshots
+
+### Gameplay — hits and misses
+![Gameplay](screenshots/gameplay.png)
+
+### Victory
+![Victory](screenshots/victory.png)
+
+### About page
+![About page](screenshots/about.png)
+
 Two players connect to the same room, place their fleets, click Ready, and take turns shooting at the opponent's board. Hits grant an extra turn; sinking a ship automatically reveals all surrounding water. The first player to destroy all 20 enemy ship cells wins.
 
 ---
