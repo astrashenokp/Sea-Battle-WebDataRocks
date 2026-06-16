@@ -2,6 +2,12 @@
 
 A real-time multiplayer Battleship game running in the browser, where the 10×10 game boards are rendered using **WebDataRocks** pivot tables as an unconventional rendering engine.
 
+## Play Online
+
+**[sea-battle-webdatarocks.onrender.com](https://sea-battle-webdatarocks.onrender.com)**
+
+Open the link in two browser tabs or share it with a friend — the room holds exactly 2 players. If someone is already playing, you'll have to wait until the game ends.
+
 ---
 
 ## Screenshots
