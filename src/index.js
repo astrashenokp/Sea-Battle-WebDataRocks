@@ -58,10 +58,6 @@ const resetLocalGame = () => {
     statusElement.style.backgroundColor = '#e3f2fd';
 };
 
-document.addEventListener('click', () => {
-    bgMusic.play().catch(() => {});
-}, { once: true });
-
 window.addEventListener('beforeunload', (e) => {
     e.preventDefault();
     e.returnValue = '';
@@ -79,6 +75,7 @@ if (randomizeBtn) {
 if (readyBtn) {
     readyBtn.addEventListener('click', () => {
         if (ws && ws.readyState === WebSocket.OPEN) {
+            bgMusic.play().catch(() => {});
             amIReady = true;
             randomizeBtn.disabled = true;
             readyBtn.disabled = true;
