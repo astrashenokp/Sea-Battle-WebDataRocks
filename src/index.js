@@ -22,8 +22,18 @@ let amIReady = false;
 
 const bgMusic = new Audio('./music.mp3');
 bgMusic.loop = true;
+let musicStarted = false;
 
 const formatCoord = (x, y) => `(${x}, ${y})`;
+
+const startBackgroundMusic = () => {
+    if (musicStarted) return;
+
+    musicStarted = true;
+    bgMusic.play().catch(() => {
+        musicStarted = false;
+    });
+};
 
 const showGameControls = () => {
     if (controls) controls.style.display = 'flex';
@@ -75,7 +85,6 @@ if (randomizeBtn) {
 if (readyBtn) {
     readyBtn.addEventListener('click', () => {
         if (ws && ws.readyState === WebSocket.OPEN) {
-            bgMusic.play().catch(() => {});
             amIReady = true;
             randomizeBtn.disabled = true;
             readyBtn.disabled = true;
@@ -126,6 +135,7 @@ ws.onmessage = (event) => {
         gameStarted = true;
         myPlayerId = data.player;
         isMyTurn = (myPlayerId === 1);
+        startBackgroundMusic();
         statusElement.innerText = data.message;
         statusElement.style.backgroundColor = isMyTurn ? '#c8e6c9' : '#ffe082';
         if (controls) controls.style.display = 'none';

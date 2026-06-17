@@ -49,7 +49,7 @@ Each board is a WebDataRocks pivot table with `x` as columns and `y` as rows. A 
 - Automatic reveal of water cells surrounding a sunk ship
 - Consecutive-turn bonus on a hit
 - Real-time sync via WebSocket — zero polling
-- Background music starts when the player clicks Ready (autoplay policy compliant)
+- Background music starts when both players are ready and the match begins
 - Disconnect detection with instant opponent notification
 - Play Again without page reload or WebSocket reconnect
 - Path traversal protection on the static file server
